@@ -6,7 +6,7 @@ import ContributionSection from "@/components/ContributionSection";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <HeroSection />
       <QuickAccessPanels />
       <NetworkingSection />

@@ -11,6 +11,7 @@ import {
   Star,
   Handshake
 } from "lucide-react";
+import "./NetworkingSection.css";
 
 const NetworkingSection = () => {
   const networkingFeatures = [
@@ -71,84 +72,85 @@ const NetworkingSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl font-bold mb-4">Networking Opportunities</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+    <section className="networking-section">
+      <div className="networking-container">
+        <div className="section-header">
+          <h2 className="section-title">Networking Opportunities</h2>
+          <p className="section-subtitle">
             Build meaningful professional relationships with alumni across industries and geographies
           </p>
         </div>
 
-        {/* Networking Features */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-          {networkingFeatures.map((feature, index) => (
-            <Card 
-              key={index}
-              className="card-gradient border-border/50 p-6 transition-smooth hover:scale-105 hover:shadow-card group"
-            >
-              <div className="bg-primary/10 text-primary p-3 rounded-lg w-fit mb-4 group-hover:scale-110 transition-smooth">
-                <feature.icon className="h-6 w-6" />
-              </div>
-              <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-smooth">
-                {feature.title}
-              </h3>
-              <p className="text-muted-foreground text-sm mb-4">
-                {feature.description}
-              </p>
-              <ul className="space-y-1">
-                {feature.features.map((item, i) => (
-                  <li key={i} className="text-sm text-muted-foreground flex items-center">
-                    <Star className="h-3 w-3 text-primary mr-2" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </Card>
-          ))}
+        <div className="networking-features-grid">
+          {networkingFeatures.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <Card 
+                key={index}
+                className="networking-feature-card"
+              >
+                <div className="feature-icon">
+                  <IconComponent />
+                </div>
+                <h3 className="feature-title">
+                  {feature.title}
+                </h3>
+                <p className="feature-description">
+                  {feature.description}
+                </p>
+                <ul className="feature-list">
+                  {feature.features.map((item, i) => (
+                    <li key={i} className="feature-item">
+                      <Star className="feature-star" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            );
+          })}
         </div>
 
-        {/* Featured Connections */}
-        <div className="mb-12">
-          <h3 className="text-2xl font-bold mb-8 text-center">Featured Alumni</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="featured-connections">
+          <h3 className="featured-title">Featured Alumni</h3>
+          <div className="connections-grid">
             {featuredConnections.map((person, index) => (
               <Card 
                 key={index}
-                className="card-gradient border-border/50 p-6 transition-smooth hover:scale-105 hover:shadow-card group"
+                className="connection-card"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="bg-primary/20 text-primary rounded-full w-12 h-12 flex items-center justify-center font-bold">
+                <div className="connection-header">
+                  <div className="connection-avatar">
                     {person.name.split(' ').map(n => n[0]).join('')}
                   </div>
-                  <Badge variant="secondary" className="text-xs">
+                  <Badge variant="secondary" className="mutual-badge">
                     {person.mutual} mutual
                   </Badge>
                 </div>
-                <h4 className="font-semibold text-lg mb-1 group-hover:text-primary transition-smooth">
+                <h4 className="connection-name">
                   {person.name}
                 </h4>
-                <p className="text-primary text-sm mb-1">{person.role}</p>
-                <p className="text-muted-foreground text-sm mb-2">{person.company}</p>
-                <div className="flex items-center text-xs text-muted-foreground mb-3">
-                  <MapPin className="h-3 w-3 mr-1" />
+                <p className="connection-role">{person.role}</p>
+                <p className="connection-company">{person.company}</p>
+                <div className="connection-meta">
+                  <MapPin className="meta-icon" />
                   {person.location}
-                  <span className="mx-2">•</span>
+                  <span className="meta-separator">•</span>
                   {person.batch}
                 </div>
-                <div className="flex flex-wrap gap-1 mb-4">
+                <div className="expertise-tags">
                   {person.expertise.slice(0, 2).map((skill, i) => (
-                    <Badge key={i} variant="outline" className="text-xs">
+                    <Badge key={i} variant="outline" className="expertise-tag">
                       {skill}
                     </Badge>
                   ))}
                   {person.expertise.length > 2 && (
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="expertise-tag">
                       +{person.expertise.length - 2}
                     </Badge>
                   )}
                 </div>
-                <Button size="sm" className="w-full">
+                <Button size="sm" className="connect-button">
                   Connect
                 </Button>
               </Card>
@@ -156,10 +158,9 @@ const NetworkingSection = () => {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="text-center">
-          <Button size="lg" className="shadow-primary">
-            <Users className="h-5 w-5 mr-2" />
+        <div className="networking-cta">
+          <Button size="lg" className="explore-button">
+            <Users className="explore-icon" />
             Explore All Alumni
           </Button>
         </div>
