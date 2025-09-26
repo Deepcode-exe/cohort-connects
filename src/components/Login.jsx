@@ -6,6 +6,7 @@ import './Login.css';
 
 const Login = ({ onToggleMode, isDarkMode }) => {
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -28,14 +29,20 @@ const Login = ({ onToggleMode, isDarkMode }) => {
   };
 
   const toggleMode = () => {
-    setIsLoginMode(!isLoginMode);
-    setFormData({
-      name: '',
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    });
+    setIsTransitioning(true);
+    
+    // Add slight delay for smooth transition
+    setTimeout(() => {
+      setIsLoginMode(!isLoginMode);
+      setFormData({
+        name: '',
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      });
+      setIsTransitioning(false);
+    }, 100);
   };
 
   return (
@@ -58,7 +65,7 @@ const Login = ({ onToggleMode, isDarkMode }) => {
 
       <div className="login-content">
         {/* Left Panel - Form */}
-        <div className={`form-panel ${isLoginMode ? 'login-mode' : 'register-mode'}`}>
+        <div className={`form-panel ${isLoginMode ? 'login-mode' : 'register-mode'} ${isTransitioning ? 'transitioning' : ''}`}>
           <div className="form-container">
             <h1 className="form-title">
               {isLoginMode ? 'LOGIN' : 'REGISTER'}
