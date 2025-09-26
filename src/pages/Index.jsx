@@ -3,10 +3,14 @@ import QuickAccessPanels from "@/components/QuickAccessPanels";
 import NetworkingSection from "@/components/NetworkingSection";
 import NewsEventsSection from "@/components/NewsEventsSection";
 import ContributionSection from "@/components/ContributionSection";
+import DarkModeToggle from "@/components/DarkModeToggle";
+import AIChatBot from "@/components/AIChatBot";
 
-const Index = () => {
+const Index = ({ onToggleMode, isDarkMode }) => {
   return (
-    <div className="min-h-screen">
+    <div className={`min-h-screen ${isDarkMode ? 'dark' : ''}`}>
+      <DarkModeToggle isDarkMode={isDarkMode} onToggle={onToggleMode} />
+      <AIChatBot isDarkMode={isDarkMode} />
       <HeroSection />
       <QuickAccessPanels />
       <NetworkingSection />
