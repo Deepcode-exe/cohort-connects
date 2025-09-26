@@ -41,8 +41,11 @@ const Login = ({ onToggleMode, isDarkMode }) => {
         password: '',
         confirmPassword: ''
       });
+    }, 50);
+    
+    setTimeout(() => {
       setIsTransitioning(false);
-    }, 100);
+    }, 800);
   };
 
   return (
